@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
-    private Rigidbody rb;
+    public Transform targetPosition;
+    float force = 15;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -24,8 +25,17 @@ public class Player : MonoBehaviour
             this.transform.Translate(0.5f, 0, 0);
         }
         else if(Input.GetKeyDown(KeyCode.D))
-        {
+        { 
             this.transform.Translate(-0.5f, 0, 0);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Ball"))
+        {
+            Vector3 direction = targetPosition.position - transform.position;
+            other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
         }
     }
 }
