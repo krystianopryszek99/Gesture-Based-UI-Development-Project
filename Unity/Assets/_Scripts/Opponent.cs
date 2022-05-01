@@ -5,8 +5,10 @@ using UnityEngine;
 public class Opponent : MonoBehaviour
 {
     public Transform ball;
+    public Transform aiTargetPosition;
     public float speed;
     public float inRange;
+    float force = 15;
     Vector3 aiPosition;
     
     void Start()
@@ -30,6 +32,15 @@ public class Opponent : MonoBehaviour
             // move to the ball if in range 
             aiPosition.x = ball.position.x; 
             transform.position = Vector3.MoveTowards(transform.position, aiPosition, speed * Time.deltaTime); 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Ball"))
+        {
+            Vector3 direction = aiTargetPosition.position - transform.position;
+            other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
         }
     }
 }
