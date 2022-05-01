@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Wall"))
+        if(other.CompareTag("Wall")) 
         {
             SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         }

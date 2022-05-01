@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     float force = 15;
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
         PlayerMovement();
     }

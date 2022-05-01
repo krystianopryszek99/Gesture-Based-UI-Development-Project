@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class Opponent : MonoBehaviour
 {
-    public GameObject[] waypoints;
-    int current = 0;
+    public Transform ball;
     public float speed;
-    float waypointRadius = 1;
+    public float inRange;
+    Vector3 aiPosition;
     
+    void Start()
+    {
+        // starting position of the opponent
+        aiPosition = transform.position;
+    }
     void Update()
     {
-        if(Vector3.Distance(waypoints[current].transform.position, transform.position) < waypointRadius)
+        Move();
+    }
+
+    void Move()
+    {
+        // distance between the opponent and the ball.
+        float dist = Vector3.Distance(ball.position, transform.position);
+
+        // check if it is in range,
+        if (dist <= inRange)
         {
-            current++;
-            if(current >= waypoints.Length)
-            {
-                current = 0;
-            }
+            // move to the ball if in range 
+            aiPosition.x = ball.position.x; 
+            transform.position = Vector3.MoveTowards(transform.position, aiPosition, speed * Time.deltaTime); 
         }
-        // Moves towards the waypoints.
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
     }
 }
