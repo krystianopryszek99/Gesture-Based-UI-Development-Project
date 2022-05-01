@@ -1,26 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System;
+using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
     [SerializeField]
     private string clientIp = "127.0.0.1";
+
     [SerializeField]
     private int clientPort = 8080;
 
     int bufferSize = 256;
-    UdpClient udpClient;
-    IPEndPoint ipEP;
-    string message;
-    byte[] data;
 
-    [SerializeField]
-    public Vector3 object_translation = new Vector3();
+    UdpClient udpClient;
+
+    IPEndPoint ipEP;
+
+    string message;
+
+    byte[] data;
 
     // Start is called before the first frame update
     void Start()
@@ -35,27 +37,13 @@ public class NetworkManager : MonoBehaviour
     {
         if (udpClient.Available > 0)
         {
-            data = udpClient.Receive(ref ipEP);
-            message = Encoding.ASCII.GetString(data, 0, data.Length);
-            Debug.Log("Received " + message);
-            UpdateTranslation(message);
-            MoveObject(object_translation);
+            IPEndPoint remoteEP = null;
+            byte[] data = udpClient.Receive(ref remoteEP);
+            string message = Encoding.ASCII.GetString(data);
+            print (message);
+
+            float posx = float.Parse(message);
+            transform.position = new Vector3(posx, 1.0f, 10f);
         }
-        
-    }
-
-    private void UpdateTranslation(string input)
-    {
-        string[] buffer;
-        buffer = input.Split(',');
-        object_translation.x = (float)Convert.ToDouble(buffer[0]);
-
-        
-    }
-
-    private void MoveObject(Vector3 translation)
-    {
-        transform.position = translation;
-        
     }
 }
