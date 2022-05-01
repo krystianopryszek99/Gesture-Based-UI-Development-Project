@@ -6,6 +6,7 @@ public class Opponent : MonoBehaviour
 {
     public Transform ball;
     public Transform aiTargetPosition;
+    public Transform[] aiTargets;
     public float speed;
     public float inRange;
     float force = 15;
@@ -39,7 +40,9 @@ public class Opponent : MonoBehaviour
     {
         if(other.CompareTag("Ball"))
         {
-            Vector3 direction = aiTargetPosition.position - transform.position;
+            // randomly chose a point to hit the ball.
+            int randomIndex = Random.Range(0, aiTargets.Length);
+            Vector3 direction = aiTargets[randomIndex].position - transform.position;
             other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
         }
     }
