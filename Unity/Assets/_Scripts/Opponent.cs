@@ -9,7 +9,7 @@ public class Opponent : MonoBehaviour
     public Transform[] aiTargets;
     public float speed;
     public float inRange;
-    float force = 15;
+    float force = 13;
     Vector3 aiPosition;
     
     void Start()
@@ -44,6 +44,8 @@ public class Opponent : MonoBehaviour
             int randomIndex = Random.Range(0, aiTargets.Length);
             Vector3 direction = aiTargets[randomIndex].position - transform.position;
             other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
+
+            ball.GetComponent<Ball>().lastHit = "opponent";
         }
     }
 }
