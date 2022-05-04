@@ -31,8 +31,8 @@ public class GameController : MonoBehaviour
         if(playerScore == scoreToGet)
         {
             Debug.Log("You Won!");
-            // Restart the game.
-            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            // Show winner menu
+            FindObjectOfType<SceneController>().showWinnerMenu();
         }
     }
 
@@ -49,8 +49,8 @@ public class GameController : MonoBehaviour
         if(opponentScore == scoreToGet)
         {
             Debug.Log("Opponent Wins!");
-            // Restart the game.
-            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            // Show gameover menu
+            FindObjectOfType<SceneController>().showGameoverMenu();
         }
     }
 }
