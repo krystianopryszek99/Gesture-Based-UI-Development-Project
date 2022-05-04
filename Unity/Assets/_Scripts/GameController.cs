@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Text opponentScoreText = null;
     int playerScore = 0;
     int opponentScore = 0;
+    [SerializeField] float scoreToGet = 5;
 
     void Start()
     {
@@ -26,6 +27,13 @@ public class GameController : MonoBehaviour
             // update the text
             playerScoreText.text = "Player: " + playerScore.ToString();
         }
+        // if the player wins
+        if(playerScore == scoreToGet)
+        {
+            Debug.Log("You Won!");
+            // Restart the game.
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        }
     }
 
     public void UpdateOpponentScore(int s)
@@ -36,6 +44,13 @@ public class GameController : MonoBehaviour
         {
             // update the text
             opponentScoreText.text = "Opponent: " + opponentScore.ToString();
+        }
+        // if the opponent wins
+        if(opponentScore == scoreToGet)
+        {
+            Debug.Log("Opponent Wins!");
+            // Restart the game.
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         }
     }
 }
