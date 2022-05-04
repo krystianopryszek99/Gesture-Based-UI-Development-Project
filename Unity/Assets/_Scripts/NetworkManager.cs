@@ -37,8 +37,19 @@ public class NetworkManager : MonoBehaviour
             string message = Encoding.ASCII.GetString(data);
             print (message);
 
-            float posx = float.Parse(message);
-            transform.position = new Vector3(posx, 1.0f, 10f);
+            //float posx = float.Parse(message);
+            //stransform.position = new Vector3(posx, 1.0f, 10f);
+
+             if (message == "Left")
+                {
+                   
+                    Debug.Log("LEFT");
+                }
+                if (message == "Right")
+                {
+                   
+                    Debug.Log("RIGHT");
+                }
         }
 
         PlayerMovement();
