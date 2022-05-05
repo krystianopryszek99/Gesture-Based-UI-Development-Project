@@ -10,7 +10,9 @@ SERVER_IP = "127.0.0.1"
 PORT_NUMBER  = 8080
 
 message = "0"
-clientSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+clientSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+clientSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
 clientSock.connect((SERVER_IP,PORT_NUMBER))
 
 print("Server IP:", SERVER_IP)
@@ -91,18 +93,11 @@ while True:
 
     # Counts the Number of Fingers Open
     allFingers = fingers.count(1)
-    print(allFingers)
+    #print(allFingers)
 
-    # Send message if two fingers open
-    if allFingers == 1:
-            clientSock.sendto(str(1).encode(), (SERVER_IP, PORT_NUMBER) )
-    if allFingers == 2:
-            clientSock.sendto(str(2).encode(), (SERVER_IP, PORT_NUMBER) )
     # Send message if 5 fingers open
     if allFingers == 5:
-           clientSock.send(message.encode('utf-8'))
-           # clientSock.sendto(str(2).encode(), (SERVER_IP, PORT_NUMBER))
-
+           clientSock.sendto(bytes(message,'utf-8'), (SERVER_IP, PORT_NUMBER))
 
     if results.multi_hand_landmarks != None:
         # Display number of fingers 

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script is used for opponent movement,
+// the opponent moves to the ball when in range
+// Picks the positions for the opponent to shoot
+// Allows opponent to hit the ball when colliding with it
 public class Opponent : MonoBehaviour
 {
     public Transform ball;
@@ -45,6 +49,7 @@ public class Opponent : MonoBehaviour
             Vector3 direction = aiTargets[randomIndex].position - transform.position;
             other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
 
+            // check if opponent was last to hit the ball
             ball.GetComponent<Ball>().lastHit = "opponent";
         }
     }

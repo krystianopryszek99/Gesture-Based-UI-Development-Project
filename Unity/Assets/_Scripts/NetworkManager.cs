@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
+// This script is used to receive data from the python server 
 public class NetworkManager : MonoBehaviour
 {
     // used to start a thread
@@ -13,12 +14,10 @@ public class NetworkManager : MonoBehaviour
     // UdpClient will parse the pre-defined address for data, which will be used to call the necessary methods
     UdpClient udpClient;
 
-    [SerializeField]
-    private string clientIp = "127.0.0.1";
+    [SerializeField] private string clientIp = "127.0.0.1";
 
     //stores the port number
-    [SerializeField]
-    private int clientPort = 8080;
+    [SerializeField] private int clientPort = 8080;
 
     public bool startRecieving = true;
 
@@ -69,5 +68,13 @@ public class NetworkManager : MonoBehaviour
                 print(err.ToString());
             }
         }
+    }
+
+    void OnDisable()
+    {
+        if (receiveThread != null)
+            receiveThread.Abort();
+
+        udpClient.Close();
     }
 }

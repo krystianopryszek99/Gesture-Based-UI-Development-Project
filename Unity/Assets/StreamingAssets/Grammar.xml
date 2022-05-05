@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<grammar xml:lang="en" tag-format="semantics/1.0" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" root="toplevel">
+
+    <rule id="toplevel" scope="public">
+        <one-of>
+            <item>
+                <ruleref uri="#mainMenu" />
+            </item>
+
+            <item>
+                <ruleref uri="#pause" />
+            </item>
+
+            <item>
+                <ruleref uri="#winnermenu" />
+            </item>
+        </one-of>
+    </rule>
+
+    <rule id="mainMenu">
+        <one-of>
+            <item>
+                <tag>out.action = "start";</tag>
+
+                <one-of>
+                    <item>start the game</item>
+                    <item>play the game</item>
+                    <item>play a game</item>
+                    <item>begin the game</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "instructions";</tag>
+
+                <one-of>
+                    <item>show instructions</item>
+                    <item>view instructions</item>
+                    <item>instructions</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "exit";</tag>
+
+                <one-of>
+                    <item>exit the game</item>
+                    <item>exit now</item>
+                    <item>quit the game</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "back";</tag>
+
+                <one-of>
+                    <item>go back</item>
+                    <item>back</item>
+                    <item>take me back</item>
+                </one-of>
+            </item>
+
+        </one-of>
+    </rule>
+
+    <rule id="pause">
+        <one-of>
+            <item>
+                <tag>out.action = "pause";</tag>
+
+                <one-of>
+                    <item>pause the game</item>
+                    <item>pause a game</item>
+                    <item>pause</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "resume";</tag>
+
+                <one-of>
+                    <item>resume the game</item>
+                    <item>resume a game</item>
+                    <item>resume</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "options";</tag>
+
+                <one-of>
+                    <item>show options</item>
+                    <item>view options</item>
+                    <item>game options</item>
+                    <item>options</item>
+                </one-of>
+            </item>
+
+            <item>
+                <tag>out.action = "mainmenu";</tag>
+
+                <one-of>
+                    <item>go to main menu</item>
+                    <item>main menu</item>
+                </one-of>
+            </item>
+        </one-of>
+    </rule>
+
+    <rule id="winnermenu">
+        <one-of>
+            <item>
+                <tag>out.action = "restart";</tag>
+
+                <one-of>
+                    <item>restart the game</item>
+                    <item>restart</item>
+                </one-of>
+            </item>
+        </one-of>
+    </rule>
+
+</grammar>

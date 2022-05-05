@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// This script is used to determine who last hit the ball,
+// set the points for the hit
+// resets the position of the ball and the opponent to the initial position
 public class Ball : MonoBehaviour
 {
     public string lastHit;
-    private int pointsForHit = 1; 
+    [SerializeField] private int pointsForHit = 1; 
     Vector3 ballPos;
+    Vector3 opponentPos;
 
     void Start()
     {
         // the initial position of the ball.
         ballPos = transform.position;
+        opponentPos = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,8 +32,10 @@ public class Ball : MonoBehaviour
             {
                 FindObjectOfType<GameController>().UpdateOpponentScore(pointsForHit);
             }
+            // reset the opponent
+            transform.position = opponentPos;
             // reset the ball.
-            ResetBall();
+            Reset();
         }
 
         if(other.CompareTag("Net")) 
@@ -42,7 +49,7 @@ public class Ball : MonoBehaviour
                 FindObjectOfType<GameController>().UpdatePlayerScore(pointsForHit);
             }
             // reset the ball.
-            ResetBall();
+            Reset();
         }
 
         if(other.CompareTag("Out")) 
@@ -56,12 +63,13 @@ public class Ball : MonoBehaviour
                 FindObjectOfType<GameController>().UpdatePlayerScore(pointsForHit);
             }
             // reset the ball.
-            ResetBall();
+            Reset();
         }
     }
 
-    void ResetBall()
+    void Reset()
     {
+        // reset the ball
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = ballPos;
     }
