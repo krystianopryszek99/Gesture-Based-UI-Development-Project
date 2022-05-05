@@ -1,80 +1,73 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
-    [SerializeField] private string clientIp = "127.0.0.1";
-    [SerializeField] private int clientPort = 8080;
-    int bufferSize = 256;
+    // used to start a thread
+    Thread receiveThread;
+
+    // UdpClient will parse the pre-defined address for data, which will be used to call the necessary methods
     UdpClient udpClient;
-    IPEndPoint ipEP;
-    string message;
-    byte[] data;
-    public Transform ball;
-    public Transform targetPosition;
-    float force = 13;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private string clientIp = "127.0.0.1";
+
+    //stores the port number
+    [SerializeField]
+    private int clientPort = 8080;
+
+    public bool startRecieving = true;
+
+    public string message;
+
+    public void Start()
     {
+        InitializeUDP();
+    }
+
+    // This method creates a new thread
+    private void InitializeUDP()
+    {
+        Debug.Log("UDP Initialized");
+
+        // receiveThread is initialized as a new Thread
+        receiveThread = new Thread(new ThreadStart(ReceiveData));
+
+        // set as Background so that it runs parallel to code
+        receiveThread.IsBackground = true;
+        receiveThread.Start();
+    }
+
+    // receive Data
+    private void ReceiveData()
+    {
+        // Variable udpClient is assigned port
         udpClient = new UdpClient(clientPort);
-        data = new byte[bufferSize];
-        ipEP = new IPEndPoint(IPAddress.Parse(clientIp), clientPort);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (udpClient.Available > 0)
+        // while data is being received
+        while (startRecieving)
         {
-            IPEndPoint remoteEP = null;
-            byte[] data = udpClient.Receive(ref remoteEP);
-            string message = Encoding.ASCII.GetString(data);
-            print (message);
+            try
+            {
+                //IP Endpoint
+                IPEndPoint anyIP =
+                new IPEndPoint(IPAddress.Parse(clientIp), clientPort);
 
-            //float posx = float.Parse(message);
-            //stransform.position = new Vector3(posx, 1.0f, 10f);
+                // Data read from the IP Endpoint declared above stored in the variable data in binary form
+                byte[] data = udpClient.Receive(ref anyIP);
 
-             if (message == "Left")
-                {
-                   
-                    Debug.Log("LEFT");
-                }
-                if (message == "Right")
-                {
-                   
-                    Debug.Log("RIGHT");
-                }
-        }
-
-        PlayerMovement();
-    }
-
-    private void PlayerMovement()
-    {
-        /*if(Input.GetKeyDown(KeyCode.A))
-        {
-            this.transform.Translate(0.5f, 0, 0);
-        }
-        else if(Input.GetKeyDown(KeyCode.D))
-        { 
-            this.transform.Translate(-0.5f, 0, 0);
-        }*/
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Ball"))
-        {
-            Vector3 direction = targetPosition.position - transform.position;
-            other.GetComponent<Rigidbody>().velocity = direction.normalized * force + new Vector3(0, 6, 0);
-            
-            ball.GetComponent<Ball>().lastHit = "player";
+                // Data is encoded to a utf-8 string format and stored in the text variable.
+                message = Encoding.UTF8.GetString(data);
+                Debug.Log (message);
+            }
+            catch (Exception err)
+            {
+                print(err.ToString());
+            }
         }
     }
 }
