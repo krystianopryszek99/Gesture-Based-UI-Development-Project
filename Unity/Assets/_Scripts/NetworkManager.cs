@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviour
     byte[] data;
     public Transform ball;
     public Transform targetPosition;
-    float force = 15;
+    float force = 13;
 
     // Start is called before the first frame update
     void Start()
