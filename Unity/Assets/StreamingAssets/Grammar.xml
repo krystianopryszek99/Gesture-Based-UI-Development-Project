@@ -12,9 +12,6 @@
                 <ruleref uri="#pause" />
             </item>
 
-            <item>
-                <ruleref uri="#winnermenu" />
-            </item>
         </one-of>
     </rule>
 
@@ -103,19 +100,6 @@
                 <one-of>
                     <item>go to main menu</item>
                     <item>main menu</item>
-                </one-of>
-            </item>
-        </one-of>
-    </rule>
-
-    <rule id="winnermenu">
-        <one-of>
-            <item>
-                <tag>out.action = "restart";</tag>
-
-                <one-of>
-                    <item>restart the game</item>
-                    <item>restart</item>
                 </one-of>
             </item>
         </one-of>

@@ -31,10 +31,18 @@ public class GameController : MonoBehaviour
         // if the player wins
         if(playerScore == scoreToGet)
         {
-            Time.timeScale = 0f;
-            Debug.Log("You Won!");
-            // Show winner menu
-            FindObjectOfType<SceneController>().showWinnerMenu();
+            if(SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                Time.timeScale = 0f;
+                Debug.Log("You Won!");
+                // Show winner menu
+                FindObjectOfType<SceneController>().showWinnerMenu();
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                FindObjectOfType<SceneController>().NextLevel();
+            }
         }
     }
 

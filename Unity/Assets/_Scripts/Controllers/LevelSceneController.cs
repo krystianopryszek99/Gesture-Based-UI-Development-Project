@@ -12,7 +12,7 @@ public class LevelSceneController : MonoBehaviour
     public void Start_Game()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
     }
 
     // shows the instructions menu

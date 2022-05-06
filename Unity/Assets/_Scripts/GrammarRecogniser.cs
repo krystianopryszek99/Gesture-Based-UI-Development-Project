@@ -85,28 +85,13 @@ public class GrammarRecogniser : MonoBehaviour
                 }
                 break;
             case "pause":
-                if (SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("GameScene")) 
-                {
-                    FindObjectOfType<SceneController>().Pause_Game();
-                }
+                FindObjectOfType<SceneController>().Pause_Game();
                 break;
             case "resume":
-                if (SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("GameScene")) 
-                {
-                    FindObjectOfType<SceneController>().Resume_Game();
-                }
+                FindObjectOfType<SceneController>().Resume_Game();
                 break;
             case "mainmenu":
-                if (SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("GameScene")) 
-                {
-                    FindObjectOfType<SceneController>().Main_Menu();
-                }
-                break;
-            case "restart":
-                if (SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("GameScene")) 
-                {
-                    FindObjectOfType<SceneController>().Restart_Game();
-                }
+                FindObjectOfType<SceneController>().Main_Menu();
                 break;
             default:
                 break;
