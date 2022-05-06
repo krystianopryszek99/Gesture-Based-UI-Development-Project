@@ -28,6 +28,15 @@
                 </one-of>
             </item>
 
+             <item>
+                <tag>out.action = "restart";</tag>
+
+                <one-of>
+                    <item>restart the game</item>
+                    <item>restart</item>
+                </one-of>
+            </item>
+
             <item>
                 <tag>out.action = "instructions";</tag>
 
@@ -80,17 +89,6 @@
                     <item>resume the game</item>
                     <item>resume a game</item>
                     <item>resume</item>
-                </one-of>
-            </item>
-
-            <item>
-                <tag>out.action = "options";</tag>
-
-                <one-of>
-                    <item>show options</item>
-                    <item>view options</item>
-                    <item>game options</item>
-                    <item>options</item>
                 </one-of>
             </item>
 

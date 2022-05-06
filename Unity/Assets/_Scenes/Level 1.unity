@@ -782,7 +782,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1278691909}
   winnerMenu: {fileID: 76435216}
   gameOverMenu: {fileID: 1722230470}
-  levelMenu: {fileID: 0}
+  levelMenu: {fileID: 164400574}
 --- !u!4 &404756825
 Transform:
   m_ObjectHideFlags: 0
@@ -2843,7 +2843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScoreText: {fileID: 1852321220}
   opponentScoreText: {fileID: 991752467}
-  scoreToGet: 5
+  scoreToGet: 2
 --- !u!4 &1126656403
 Transform:
   m_ObjectHideFlags: 0

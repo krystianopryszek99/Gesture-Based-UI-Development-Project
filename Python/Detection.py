@@ -11,8 +11,10 @@ PORT_NUMBER  = 8080
 
 message = "0"
 
+# Create a client socket
 clientSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 clientSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
+# Connect to the server
 clientSock.connect((SERVER_IP,PORT_NUMBER))
 
 print("Server IP:", SERVER_IP)

@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 // This script is used to control the game scene menus
 public class SceneController : MonoBehaviour
 {
-    public GameObject pauseMenu, winnerMenu, gameOverMenu, levelMenu;
-  
+    public GameObject pauseMenu,
+            winnerMenu,
+            gameOverMenu,
+            levelMenu;
+
     // resume the game
     public void Resume_Game()
     {
@@ -29,6 +32,17 @@ public class SceneController : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    // restart the game
+
+    public void Restart_Game()
+    {
+        if ( SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level 1"))
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
+        }
     }
 
     // display the winner and gameover menu

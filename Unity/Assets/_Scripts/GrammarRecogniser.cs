@@ -93,6 +93,9 @@ public class GrammarRecogniser : MonoBehaviour
             case "mainmenu":
                 FindObjectOfType<SceneController>().Main_Menu();
                 break;
+             case "restart":
+                FindObjectOfType<SceneController>().Restart_Game();
+                break;
             default:
                 break;
         }
